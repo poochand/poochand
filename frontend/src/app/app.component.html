@@ -1,0 +1,66 @@
+<div class="container" *ngIf="dataExist">
+  <h1>ECM Credit Claim Posting</h1>
+  <dl class="row">
+    <dt class="col-sm-4">Date:</dt>
+    <dd class="col-sm-8">{{ ecmsData.dateCreateFlux}}</dd>
+    <dt class="col-sm-4">Date Valeur:</dt>
+    <dd class="col-sm-8">{{ ecmsData.dateValueFlux }}</dd>
+    <dt class="col-sm-4">Creditor:</dt>
+    <dd class="col-sm-8">{{ ecmsData.valueR  }}</dd>
+
+    <dt class="col-sm-12">Previous Position:</dt>
+    <dt class="col-sm-4">Nb LIQ Input Loans:</dt>
+    <dd class="col-sm-8">{{ ecmsData.numberLoanLIQ  }}</dd>
+    <dt class="col-sm-4">Nb SLS Input Loans:</dt>
+    <dd class="col-sm-8">{{ ecmsData.numberLoanSLS  }}</dd>
+
+    <dt class="col-sm-4">No of credit claims:</dt>
+    <dd class="col-sm-8">{{ ecmsData.numberLoansEligible  }}</dd>
+    <dt class="col-sm-4">Credit Claims Total amount in Euro:</dt>
+    <dd class="col-sm-8">{{ ecmsData.amountLoansEligible  }}</dd>
+
+    <dt class="col-sm-12">Current Posting:</dt>
+    <dt class="col-sm-4">Nb LIQ Input Loans:</dt>
+    <dd class="col-sm-8">{{ ecmsData.numberLoanLIQ  }}</dd>
+    <dt class="col-sm-4">Nb SLS Input Loans:</dt>
+    <dd class="col-sm-8">{{ ecmsData.numberLoanSLS  }}</dd>
+
+
+    <dt class="col-sm-4">New Credit Claim Registrations (CCR):</dt>
+    <dd class="col-sm-4">{{ ecmsData.numberCCR  }}</dd>
+    <dd class="col-sm-4">{{ ecmsData.amountCCR | number  }}</dd>
+
+    <dt class="col-sm-4">New Credit Claim Updates(CCU):</dt>
+    <dd class="col-sm-4">{{ ecmsData.numberCCU  }}</dd>
+    <dd class="col-sm-4">{{ ecmsData.amountCCU | number }}</dd>
+
+    <dt class="col-sm-4">New Credit Claim Balance adjustments (CCOAU):</dt>
+    <dd class="col-sm-4">{{ ecmsData.numberCCOAU  }}</dd>
+    <dd class="col-sm-4">{{ ecmsData.amountCCOAU | number  }}</dd>
+
+
+    <dt class="col-sm-4">New Rating Registration:</dt>
+    <dd class="col-sm-8">{{ ecmsData.numberRR  }}</dd>
+    <dt class="col-sm-4">New Rating Update:</dt>
+    <dd class="col-sm-8">{{ ecmsData.numberRU  }}</dd>
+
+    <dt class="col-sm-4">New Credit Claim Mobilization(MOB):</dt>
+    <dd class="col-sm-4">{{ ecmsData.numberMob  }}</dd>
+    <dd class="col-sm-4">{{ ecmsData.amountMob | number  }}</dd>
+
+    <dt class="col-sm-4">New Credit Claim Mobilization(DEMOB):</dt>
+    <dd class="col-sm-4">{{ ecmsData.numberDemob  }}</dd>
+    <dd class="col-sm-4">{{ ecmsData.amountDemob  | number }}</dd>
+
+    <dt class="col-sm-4">Total:</dt>
+    <dd class="col-sm-4">{{ ecmsData.numberEvent  }}</dd>
+    <dd class="col-sm-4">{{ ecmsData.amountEvent | number }}</dd>
+
+    <dt class="col-sm-12">Next Position:</dt>
+    <dt class="col-sm-4">Number of credit claims:</dt>
+    <dd class="col-sm-8">{{ ecmsData.numberLoansEligible  }}</dd>
+    <dt class="col-sm-4">Credit Claims Total amount in EURO:</dt>
+    <dd class="col-sm-8">{{ ecmsData.amountLoansEligible | number }}</dd>
+  </dl>
+</div>
+<div class="container" *ngIf="!dataExist"> No Data Found</div>
