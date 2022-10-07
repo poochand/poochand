@@ -43,6 +43,44 @@ public class CreditClaim {
     private Long numberLoanLIQ;
 
     private Long numberLoanSLS;
+    private Long numberLoanLIQPrev;
+
+    private Long numberLoanSLSPrev;
+    private Long numberLoansEligiblePrev;
+
+    private Long amountLoansEligiblePrev;
+
+    public Long getNumberLoanLIQPrev() {
+        return numberLoanLIQPrev;
+    }
+
+    public void setNumberLoanLIQPrev(Long numberLoanLIQPrev) {
+        this.numberLoanLIQPrev = numberLoanLIQPrev;
+    }
+
+    public Long getNumberLoanSLSPrev() {
+        return numberLoanSLSPrev;
+    }
+
+    public void setNumberLoanSLSPrev(Long numberLoanSLSPrev) {
+        this.numberLoanSLSPrev = numberLoanSLSPrev;
+    }
+
+    public Long getNumberLoansEligiblePrev() {
+        return numberLoansEligiblePrev;
+    }
+
+    public void setNumberLoansEligiblePrev(Long numberLoansEligiblePrev) {
+        this.numberLoansEligiblePrev = numberLoansEligiblePrev;
+    }
+
+    public Long getAmountLoansEligiblePrev() {
+        return amountLoansEligiblePrev;
+    }
+
+    public void setAmountLoansEligiblePrev(Long amountLoansEligiblePrev) {
+        this.amountLoansEligiblePrev = amountLoansEligiblePrev;
+    }
 
     public Long getNumberLoanLIQ() {
         return numberLoanLIQ;

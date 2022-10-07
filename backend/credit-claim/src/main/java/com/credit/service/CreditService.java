@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Service
 public class CreditService {
@@ -33,54 +34,58 @@ public class CreditService {
 
     public CreditClaim fetchCreditClaim() {
 
-        CreditClaimEntity creditClaimEntity = claimRepository.fetchRecordWithMaxDate();
+        List<CreditClaimEntity> creditClaimEntity = claimRepository.fetchRecordWithMaxDate();
         CreditParamsEntity paramsEntity = creditParamRepository.fetchBICRecord();
 
-        return generateCreditClaim(creditClaimEntity,paramsEntity);
+        return generateCreditClaim(creditClaimEntity.get(0),creditClaimEntity.get(1),paramsEntity);
     }
 
-    private CreditClaim generateCreditClaim(CreditClaimEntity creditClaimEntity, CreditParamsEntity paramsEntity) {
-        if(creditClaimEntity==null)
+    private CreditClaim generateCreditClaim(CreditClaimEntity creditClaimEntityMax,CreditClaimEntity creditClaimEntityMaxMinusOne, CreditParamsEntity paramsEntity) {
+        if(creditClaimEntityMax==null)
             return null;
 
         CreditClaim creditClaim=new CreditClaim();
         creditClaim.setValueR(paramsEntity!=null?paramsEntity.getValeur():null);
-        creditClaim.setIdFlux(creditClaimEntity.getIdFlux());
-        creditClaim.setDateCreateFlux((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntity.getDateCreateFlux()));
-        creditClaim.setDateValueFlux((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntity.getDateValueFlux()));
-        creditClaim.setNumFlux(creditClaimEntity.getNumFlux());
-        creditClaim.setAmhDateSend((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntity.getAmhDateSend()));
-        creditClaim.setAmhDateBack((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntity.getAmhDateBack()));
-        creditClaim.setAmhStatus(creditClaimEntity.getAmhStatus());
-        creditClaim.setEcmsDateSend((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntity.getEcmsDateSend()));
-        creditClaim.setEcmsDateBack((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntity.getEcmsDateBack()));
-        creditClaim.setEcmsStatus(creditClaimEntity.getEcmsStatus());
-        creditClaim.setNumberTricpLoan(creditClaimEntity.getNumberTricpLoan());
-        creditClaim.setAmountTricpLoan(creditClaimEntity.getAmountTricpLoan());
-        creditClaim.setNumberLoansEligible(creditClaimEntity.getNumberLoansEligible());
-        creditClaim.setAmountLoansEligible(creditClaimEntity.getAmountLoansEligible());
-        creditClaim.setNumberCCR(creditClaimEntity.getNumberCCR());
-        creditClaim.setAmountCCR(creditClaimEntity.getAmountCCR());
-        creditClaim.setNumberCCU(creditClaimEntity.getNumberCCU());
-        creditClaim.setAmountCCU(creditClaimEntity.getAmountCCU());
+        creditClaim.setIdFlux(creditClaimEntityMax.getIdFlux());
+        creditClaim.setNumberLoanLIQPrev(creditClaimEntityMaxMinusOne.getNumberLoanLIQ());
+        creditClaim.setNumberLoanSLSPrev(creditClaimEntityMaxMinusOne.getNumberLoanSLS());
+        creditClaim.setNumberLoansEligiblePrev(creditClaimEntityMaxMinusOne.getNumberLoansEligible());
+        creditClaim.setAmountLoansEligiblePrev(creditClaimEntityMaxMinusOne.getAmountLoansEligible());
+        creditClaim.setDateCreateFlux((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntityMax.getDateCreateFlux()));
+        creditClaim.setDateValueFlux((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntityMax.getDateValueFlux()));
+        creditClaim.setNumFlux(creditClaimEntityMax.getNumFlux());
+        creditClaim.setAmhDateSend((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntityMax.getAmhDateSend()));
+        creditClaim.setAmhDateBack((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntityMax.getAmhDateBack()));
+        creditClaim.setAmhStatus(creditClaimEntityMax.getAmhStatus());
+        creditClaim.setEcmsDateSend((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntityMax.getEcmsDateSend()));
+        creditClaim.setEcmsDateBack((new SimpleDateFormat("dd/MM/yyyy")).format(creditClaimEntityMax.getEcmsDateBack()));
+        creditClaim.setEcmsStatus(creditClaimEntityMax.getEcmsStatus());
+        creditClaim.setNumberTricpLoan(creditClaimEntityMax.getNumberTricpLoan());
+        creditClaim.setAmountTricpLoan(creditClaimEntityMax.getAmountTricpLoan());
+        creditClaim.setNumberLoansEligible(creditClaimEntityMax.getNumberLoansEligible());
+        creditClaim.setAmountLoansEligible(creditClaimEntityMax.getAmountLoansEligible());
+        creditClaim.setNumberCCR(creditClaimEntityMax.getNumberCCR());
+        creditClaim.setAmountCCR(creditClaimEntityMax.getAmountCCR());
+        creditClaim.setNumberCCU(creditClaimEntityMax.getNumberCCU());
+        creditClaim.setAmountCCU(creditClaimEntityMax.getAmountCCU());
 
-        creditClaim.setNumberCCOAU(creditClaimEntity.getNumberCCOAU());
-        creditClaim.setAmountCCOAU(creditClaimEntity.getAmountCCOAU());
-        creditClaim.setNumberMob(creditClaimEntity.getNumberMob());
-        creditClaim.setAmountMob(creditClaimEntity.getAmountMob());
-        creditClaim.setNumberDemob(creditClaimEntity.getNumberDemob());
-        creditClaim.setAmountDemob(creditClaimEntity.getAmountDemob());
-        creditClaim.setNumberRR(creditClaimEntity.getNumberRR());
-        creditClaim.setNumberRU(creditClaimEntity.getNumberRU());
-        creditClaim.setNumberEvent(creditClaimEntity.getNumberEvent());
-        creditClaim.setAmountEvent(creditClaimEntity.getAmountEvent());
-        creditClaim.setNumberLoanTricp(creditClaimEntity.getNumberLoanTricp());
-        creditClaim.setAmountLoanTricp(creditClaimEntity.getAmountLoanTricp());
-        creditClaim.setNumberLoanAcc(creditClaimEntity.getNumberLoanAcc());
-        creditClaim.setAmountLoanAcc(creditClaimEntity.getAmountLoanAcc());
+        creditClaim.setNumberCCOAU(creditClaimEntityMax.getNumberCCOAU());
+        creditClaim.setAmountCCOAU(creditClaimEntityMax.getAmountCCOAU());
+        creditClaim.setNumberMob(creditClaimEntityMax.getNumberMob());
+        creditClaim.setAmountMob(creditClaimEntityMax.getAmountMob());
+        creditClaim.setNumberDemob(creditClaimEntityMax.getNumberDemob());
+        creditClaim.setAmountDemob(creditClaimEntityMax.getAmountDemob());
+        creditClaim.setNumberRR(creditClaimEntityMax.getNumberRR());
+        creditClaim.setNumberRU(creditClaimEntityMax.getNumberRU());
+        creditClaim.setNumberEvent(creditClaimEntityMax.getNumberEvent());
+        creditClaim.setAmountEvent(creditClaimEntityMax.getAmountEvent());
+        creditClaim.setNumberLoanTricp(creditClaimEntityMax.getNumberLoanTricp());
+        creditClaim.setAmountLoanTricp(creditClaimEntityMax.getAmountLoanTricp());
+        creditClaim.setNumberLoanAcc(creditClaimEntityMax.getNumberLoanAcc());
+        creditClaim.setAmountLoanAcc(creditClaimEntityMax.getAmountLoanAcc());
 
-        creditClaim.setNumberLoanLIQ(creditClaimEntity.getNumberLoanLIQ());
-        creditClaim.setNumberLoanSLS(creditClaimEntity.getNumberLoanSLS());
+        creditClaim.setNumberLoanLIQ(creditClaimEntityMax.getNumberLoanLIQ());
+        creditClaim.setNumberLoanSLS(creditClaimEntityMax.getNumberLoanSLS());
 
 
         return creditClaim;
